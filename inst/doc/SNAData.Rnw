@@ -1,0 +1,268 @@
+%
+% NOTE -- ONLY EDIT THE .Rnw FILE!!!  The .tex file is
+% likely to be overwritten.
+%
+%\VignetteDepends{graph, Rgraphviz}
+%\VignetteKeywords{Social Networks Analysis, Graphs}
+%\VignettePackage{SNAData}
+%\VignetteIndexEntry{SNAData}
+
+\documentclass[11pt]{article}
+
+
+\usepackage{amsmath,pstricks}
+\usepackage[authoryear,round]{natbib}
+\usepackage{hyperref}
+\usepackage{times}
+\usepackage{comment}
+
+
+\textwidth=6.2in
+\textheight=8.5in
+%\parskip=.3cm
+\oddsidemargin=.1in
+\evensidemargin=.1in
+\headheight=-.3in
+
+\newcommand{\scscst}{\scriptscriptstyle}
+\newcommand{\scst}{\scriptstyle}
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+
+
+\bibliographystyle{plainnat}
+
+\title{Social Networks Analysis Data}
+\author{Denise Scholtens}
+\date{}
+
+\begin{document}
+\maketitle
+
+\Rpackage{SNAData} contains \Robject{graphNEL} objects of the social networks analysis data available in Appendix B of Wasserman. S. and Faust. K. (1994). \textit{Social Network Analysis}. New York: Cambridge University Press.  The descriptions of the data available here are based on the information in Appendix B.
+
+<<loadlibs>>=
+
+ library(graph)
+ library(Rgraphviz)
+ library(SNAData)
+
+@
+
+\section*{Krackhardt's High-tech Managers}
+
+Tables B.1 - B.3 in Wasserman and Faust contain data for three directed relations between Krackhardt's 21 high-tech managers: advice, friendship, reports to.  Table B.4 contains a table of four attributes for the managers: age (in years), tenure (length of time employed by the company, in years), level in corporate hierarchy (coded 1,2,3), department of the company (coded 1,2,3,4).
+
+\hspace{.2in}
+
+\begin{tabular}{|lll|}
+\hline
+Relation & W \& F & \Rpackage{SNAData} object \\
+ & Table No. & \\
+\hline
+\multicolumn{3}{|l|}{\textbf{Graphs:}} \\
+advice & B.1 & \Robject{advice} \\
+ & & \\
+friendship & B.2 & \Robject{friendship} \\
+ & & \\
+reports to & B.3 & \Robject{reportsTo} \\
+ & & \\
+\multicolumn{3}{|l|}{\textbf{Attributes:}} \\
+attributes & B.4 & \Robject{krackhardtAttrs} \\
+ & & \\
+\hline 
+\end{tabular}
+
+<<krackhardt,eval=TRUE,fig=TRUE>>=
+
+data(advice)
+data(friendship)
+data(reportsTo)
+data(krackhardtAttrs)
+
+advice
+friendship
+reportsTo
+krackhardtAttrs
+
+plot(reportsTo)
+
+@
+
+\section*{Padgett's Florentine Families}
+
+Tables B.5 - B.6 contain data for two undirected relations between 16 of Padgett's Florentine families: business, marital.  Table B.7 contains a table of three attributes for the families: wealth (net wealth, measured in 1427, in thousands of lira), number of priorates (number of seats on the Civic Council held between 1282 and 1344), number of ties (number of business or marital ties in the total network of 116 families).
+
+\hspace{.2in}
+
+\begin{tabular}{|lll|}
+\hline
+Relation & W \& F & \Rpackage{SNAData} object \\
+ & Table No. & \\
+\hline
+\multicolumn{3}{|l|}{\textbf{Graphs:}} \\
+business & B.5 & \Robject{business} \\
+ & & \\
+marital & B.6 & \Robject{marital} \\
+ & & \\
+\multicolumn{3}{|l|}{\textbf{Attributes:}} \\
+attributes & B.7 & \Robject{florentineAttrs} \\
+ & & \\
+\hline 
+\end{tabular}
+
+<<padgett>>=
+
+data(business)
+data(marital)
+data(florentineAttrs)
+
+business
+marital
+florentineAttrs
+
+adj(business,"Bischeri")
+adj(marital,"Bischeri")
+
+@
+
+
+
+\section*{Freeman's EIES Network}
+
+Tables B.8 - B.10 contain data for three directed, weighted relations between 32 of Freeman's EIES researchers: acquaintanceship at time 1, January 1978, the start of the study; acquaintanceship at time 2, September 1978, the end of the study; the number of messages sent.  The acquaintanceship relations are valued as follows: 4=close personal friend, 3=friend, 2=person I've met, 1=person I've heard of, but not met, 0=unknown name or no reply.  Table B.11 contains a table of four attributes for the researchers: original ID as reported in Freeman and Freeman (1979), number of citations in 1978, discipline (coded 1,2,3), discipline itself.
+
+\hspace{.2in}
+
+\begin{tabular}{|lll|}
+\hline
+Relation & W \& F & \Rpackage{SNAData} object \\
+ & Table No. & \\
+\hline
+\multicolumn{3}{|l|}{\textbf{Graphs:}} \\
+acquaintanceship & B.8 & \Robject{acqTime1} \\
+at time 1 & & \\
+ & & \\
+acquaintanceship & B.9 & \Robject{acqTime2} \\
+at time 2 & & \\
+ & & \\
+messages & B.10 & \Robject{messages} \\
+ & & \\
+\multicolumn{3}{|l|}{\textbf{Attributes:}} \\
+attributes & B.11 & \Robject{freemanAttrs} \\
+ & & \\
+\hline 
+\end{tabular}
+
+<<freeman>>=
+
+data(acqTime1)
+data(acqTime2)
+data(messages)
+data(freemanAttrs)
+
+acqTime1
+acqTime2
+messages
+freemanAttrs[1:5,]
+
+edgeL(acqTime1,6)
+edgeL(acqTime2,6)
+edgeL(messages,6)
+
+@
+
+
+\section*{Countries Trade Data}
+
+Tables B.12 - B.16 contain data for five directed trade relations between 24 countries: basic manufactured goods; food and live animals; crude materials, excluding food; minerals, fuels, and other petroleum products; exchange of diplomats.  Table B.17 contains a table of four attributes for the countries: average annual population growth between 1970 and 1981; average GNP growth rate per capita between 1970 and 1981; secondary school enrollment ratio in 1980; energy consumption per capita in 1980, in kilo coal equivalents.
+
+\hspace{.2in}
+
+\begin{tabular}{|lll|}
+\hline
+Relation & W \& F & \Rpackage{SNAData} object \\
+ & Table No. & \\
+\hline
+\multicolumn{3}{|l|}{\textbf{Graphs:}} \\
+basic manufactured goods & B.12 & \Robject{basicGoods} \\
+ & & \\
+food and live animals & B.13 & \Robject{food} \\
+ & & \\
+crude materials, & B.14 & \Robject{crudeMaterials} \\
+excluding food & & \\
+ & & \\
+minerals, fuels, and other & B.15 & \Robject{minerals} \\
+petroleum products & & \\
+ & & \\
+exchange of diplomats & B.16 & \Robject{diplomats} \\
+ & & \\
+\multicolumn{3}{|l|}{\textbf{Attributes:}} \\
+attributes & B.17 & \Robject{countriesAttrs} \\
+ & & \\
+\hline 
+\end{tabular}
+
+<<countries>>=
+
+data(basicGoods)
+data(food)
+data(crudeMaterials)
+data(minerals)
+data(diplomats)
+data(countriesAttrs)
+
+
+basicGoods
+food
+crudeMaterials
+minerals
+diplomats
+countriesAttrs[1:5,]
+
+degree(basicGoods)
+degree(diplomats)
+
+@
+
+\section*{Galaskiewicz's CEO and Clubs Network}
+
+Table B.18 contains information about the membership of the chief executive officers from 26 corporations in 15 clubs.  \Rpackage{SNAData} contains both a graph and affiliation matrix representation of these data.  The rows of the affiliation matrix represent CEOs and the columns represent clubs.  The graph is a bipartite graph which contains two sets of nodes for the CEOs and clubs, and directed edges connect the CEOs to the clubs of which they are members.
+
+\hspace{.2in}
+
+\begin{tabular}{|lll|}
+\hline
+Relation & W \& F & \Rpackage{SNAData} object \\
+ & Table No. & \\
+\hline
+\multicolumn{3}{|l|}{\textbf{Graph:}} \\
+club membership & B.18 & \Robject{CEOclubsBPG} \\
+ & & \\
+\multicolumn{3}{|l|}{\textbf{Affiliation Matrix:}} \\
+club membership & B.18 & \Robject{CEOclubsAM} \\
+ & & \\
+\hline 
+\end{tabular}
+
+<<CEOs,eval=TRUE,fig=TRUE>>=
+
+data(CEOclubsBPG)
+data(CEOclubsAM)
+
+CEOclubsBPG
+CEOclubsAM[1:5,1:5]
+
+cc5 <- c(paste("CEO",1:5,sep=""),paste("Club",1:5,sep=""))
+subG <- subGraph(cc5,CEOclubsBPG)
+subG@edgemode <- "directed"
+plot(subG)
+
+@
+
+
+
+
+\end{document}
