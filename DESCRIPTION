@@ -1,9 +1,8 @@
 Package: SNAData
 Title: Social Networks Analysis Data Examples
-Version: 1.8.0
+Version: 1.8.1
 Author: Denise Scholtens
-Description: Data from Wasserman & Faust (1999) "Social Network
-        Analysis"
+Description: Data from Wasserman & Faust (1999) "Social Network Analysis"
 Maintainer: Denise Scholtens <dscholtens@northwestern.edu>
 Depends: R (>= 2.4.0), graph
 Suggests: Rgraphviz

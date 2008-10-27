@@ -257,7 +257,7 @@ CEOclubsAM[1:5,1:5]
 
 cc5 <- c(paste("CEO",1:5,sep=""),paste("Club",1:5,sep=""))
 subG <- subGraph(cc5,CEOclubsBPG)
-subG@edgemode <- "directed"
+edgemode(subG) <- "directed"
 plot(subG)
 
 @
