@@ -1,4 +1,4 @@
-.First.lib <- function(libname,pkgname,where){
+.onLoad <- function(libname,pkgname){
 	require("graph") || stop("Need package graph")
 }
 
