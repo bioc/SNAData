@@ -1,6 +1,6 @@
 Package: SNAData
 Title: Social Networks Analysis Data Examples
-Version: 1.26.0
+Version: 1.27.0
 Author: Denise Scholtens
 Description: Data from Wasserman & Faust (1999) "Social Network Analysis"
 Maintainer: Denise Scholtens <dscholtens@northwestern.edu>
